@@ -25,6 +25,7 @@ export default function Layout() {
                     <Grid item xs={3} sx={{
                         ...classes.borderGrid,
                         paddingLeft: '24px',
+                        paddingTop: '24px',
                     }}>
                         <Siderbar />
                     </Grid>
@@ -50,7 +51,7 @@ export default function Layout() {
 
 const classes = {
     contentGrid: {
-        p: '16px 24px 46px 24px',
+        p: '40px 45px 46px 24px',
     },
     borderGrid: {
         borderTop: '1px solid #C7D3D9',

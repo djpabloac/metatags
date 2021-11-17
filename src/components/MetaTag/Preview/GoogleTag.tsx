@@ -1,36 +1,48 @@
-import { Fragment, useState } from 'react';
-import { classesGlobal } from "styles/useStyleGlobal";
+import { Fragment, useContext } from 'react';
 import {
-    Box,
     Typography,
 } from '@mui/material';
-import { initialMetaTagField } from 'components/MetaTag/Preview';
+import BaseTag from "components/MetaTag/Preview/BaseTag";
+import MetaTagContext from 'context/MetaTag/MetaTagContext';
 
 export default function GoogleTag() {
-    const [metaTagField, setMetaTagField] = useState(initialMetaTagField);
+    const { MetaTagField } = useContext(MetaTagContext);
 
     return (
         <Fragment>
-            <Box sx={classes.metaTagHead}>
-                <Typography sx={classes.metaTagCaption}>
-                    Google
+            <BaseTag title='Google' marginShort={true}>
+                <Typography sx={{
+                    display: 'block',
+                    letterSpacing: 'normal',
+                    color: '#1a0dab',
+                    cursor: 'pointer',
+                    overflow: 'hidden',
+                    textOverflow: 'ellipsis',
+                    whiteSpace: 'nowrap',
+                    '@media screen and (min-width: 770px)': {
+                        fontSize: '18px',
+                        lineHeight: '1.2',
+                    },
+                }}>
+                    {MetaTagField.title}
                 </Typography>
-                <Box>
-                    <Typography>{metaTagField.title}</Typography>
-                    <Typography>{metaTagField.url}</Typography>
-                    <Typography>{metaTagField.description}</Typography>
-                </Box>
-            </Box>
+                <Typography sx={{
+                    fontSize: '14px',
+                    lineHeight: '16px',
+                    letterSpacing: 'normal',
+                    color: '#006621',
+                }}>
+                    {MetaTagField.url}
+                </Typography>
+                <Typography sx={{
+                    color: '#545454',
+                    fontSize: '13px',
+                    lineHeight: '1.4',
+                    wordWrap: 'break-word',
+                }}>
+                    {MetaTagField.description}
+                </Typography>
+            </BaseTag>
         </Fragment>
     )
 }
-
-const classes = {
-    metaTagHead: {
-        mb: '0.5em',
-        mt: '0.5em',
-    },
-    metaTagCaption: {
-        ...classesGlobal.captionGlobal,
-    },
-} as const;

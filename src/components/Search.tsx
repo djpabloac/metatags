@@ -1,20 +1,23 @@
-import { Fragment, useState } from 'react';
-import { SearchMeta  } from "components/UI/material-metatag";
-import { initialMetaTagField } from 'components/MetaTag/Preview';
+import {
+    Fragment,
+    useContext
+} from 'react';
+import { SearchMeta } from "components/UI/material-metatag";
+import MetaTagContext from "context/MetaTag/MetaTagContext";
 
 export default function Search() {
+    const { MetaTagField, setMetaTag } = useContext(MetaTagContext);
 
-    const [fieldSearch, setFieldSearch] = useState(initialMetaTagField.url);
-
-    const handlerSearch = (e: any) => setFieldSearch(e.target.value);
+    const handleChange = (e: any) => setMetaTag(e.target.name as string, e.target.value as string);
 
     return (
         <Fragment>
             <SearchMeta
                 placeholder='Search...'
-                value={fieldSearch}
+                name='url'
+                value={MetaTagField?.url}
                 inputProps={{ 'aria-label': 'search' }}
-                onChange={handlerSearch}
+                onChange={handleChange}
             />
         </Fragment>
     )

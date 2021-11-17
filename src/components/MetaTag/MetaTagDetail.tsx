@@ -1,4 +1,7 @@
-import { Fragment, useState } from 'react';
+import {
+    Fragment,
+    useContext,
+} from 'react';
 import {
     Box,
     Typography,
@@ -10,21 +13,13 @@ import {
     TextAreaMeta,
 } from "components/UI/material-metatag";
 import { classesGlobal } from 'styles/useStyleGlobal';
-import { initialMetaTagField } from 'components/MetaTag/Preview';
+import MetaTagContext from 'context/MetaTag/MetaTagContext';
 
 export default function MetaTagDetail(): JSX.Element {
 
-    const [metaTagField, setMetaTagField] = useState(initialMetaTagField);
+    const { MetaTagField, setMetaTag } = useContext(MetaTagContext);
 
-    const handlerTitle = (e: any) => setMetaTagField({
-        ...metaTagField,
-        title: e.target.value
-    });
-
-    const handlerDescription = (e: any) => setMetaTagField({
-        ...metaTagField,
-        description: e.target.value
-    });
+    const handleChange = (e: any) => setMetaTag(e.target.name as string, e.target.value as string);
 
     return (
         <Fragment>
@@ -55,26 +50,28 @@ export default function MetaTagDetail(): JSX.Element {
                         Title
                     </Typography>
                     <Typography sx={classes.metaTagCaption}>
-                        0
+                    {MetaTagField.titleLength}
                     </Typography>
                 </Box>
                 <TextFieldMeta
                     placeholder='Title...'
-                    value={metaTagField.title}
-                    onChange={handlerTitle}
+                    name='title'
+                    value={MetaTagField.title}
+                    onChange={handleChange}
                 />
                 <Box sx={classes.metaTagHead}>
                     <Typography sx={classes.metaTagCaption}>
                         Description
                     </Typography>
                     <Typography sx={classes.metaTagCaption}>
-                        0
+                        {MetaTagField.descriptionLength}
                     </Typography>
                 </Box>
                 <TextAreaMeta
                     placeholder='Description...'
-                    value={metaTagField.description}
-                    onChange={handlerDescription}
+                    name='description'
+                    value={MetaTagField.description}
+                    onChange={handleChange}
                     multiline
                     rows={4}
                 />

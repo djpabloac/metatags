@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useState, useContext, useEffect } from 'react'
 import Image from 'next/image';
 import {
     List,
@@ -11,13 +11,29 @@ import {
 import { SocialNetworkType } from "types/socialnetwork.types";
 import { classesGlobal } from 'styles/useStyleGlobal';
 import { data as dbsocial } from "utils/data";
+import SiderbarContext from "context/Siderbar/SiderbarContext";
 
 export default function Siderbar() {
 
     const [sidebarSocialNetworks, setSidebarSocialNetworks] = useState(dbsocial);
+    const { addSelected, removeSelected } = useContext(SiderbarContext);
+
+    useEffect(() => {
+        sidebarSocialNetworks.map(s => s.socialNetwork.map(sn => {
+            if(sn.checked)
+                addSelected(sn);
+        }))
+    }, []);
 
     const handlerSocial = (sn: SocialNetworkType) => {
-        console.log(sn);
+        sn.checked = !sn.checked;
+        if(sn.checked){
+            addSelected(sn);
+        }
+        else {
+            removeSelected(sn);
+        }
+
         setSidebarSocialNetworks([
             ...sidebarSocialNetworks,
         ]);
@@ -46,11 +62,12 @@ export default function Siderbar() {
                                     }}
                                 >
                                     <ListItemIcon>
-                                        <Avatar sx={sn.disabled ? classes.socialNetworkAvatarDisabled : classes.socialNetworkAvatar}>
+                                        <Avatar sx={sn.checked ? classes.socialNetworkAvatar : classes.socialNetworkAvatarDisabled} >
                                             <Image src={sn.logo} alt='Meta Tags' width='21' height='18' />
                                         </Avatar>
                                     </ListItemIcon>
-                                    <ListItemText primary={sn.name} />
+                                    <ListItemText sx={sn.checked ? classes.socialNetworkTextNormal : classes.socialNetworkTextDisabled}
+                                        primary={sn.name} />
                                 </ListItem>
                             ))}
                         </ul>
@@ -62,7 +79,7 @@ export default function Siderbar() {
 }
 
 
-const classes ={
+const classes = {
     socialNetworkList: {
         width: '100%',
         maxWidth: 360,
@@ -72,15 +89,25 @@ const classes ={
         '& ul': { padding: 0 },
     },
     socialNetworkAvatar: {
-        bgcolor: '#2A81FB',
+        ...classesGlobal.transitionGlobal,
+        bgcolor: classesGlobal.palette.avatar.bgcolorActive,
     },
     socialNetworkAvatarDisabled: {
-        bgcolor: '#18283E',
+        ...classesGlobal.transitionGlobal,
+        bgcolor: classesGlobal.palette.avatar.bgcolorDisabled,
     },
     cursorNormal: {
         cursor: 'default',
     },
     cursorPointer: {
         cursor: 'pointer',
+    },
+    socialNetworkTextNormal: {
+        ...classesGlobal.transitionGlobal,
+        color: classesGlobal.palette.link.colorActive,
+    },
+    socialNetworkTextDisabled: {
+        ...classesGlobal.transitionGlobal,
+        color: classesGlobal.palette.link.colorDisabled,
     }
 } as const;

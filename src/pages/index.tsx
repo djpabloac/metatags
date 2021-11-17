@@ -1,14 +1,23 @@
 import { Fragment } from "react";
-import { CssBaseline } from '@mui/material'
-import Layout from 'components/Layout'
-import type { NextPage } from 'next'
+import { NextPage } from "next";
+import { CssBaseline } from '@mui/material';
+import {
+  MetaTagState,
+  SiderbarState,
+}
+  from 'context';
+import Layout from 'components/Layout';
 
 const Home: NextPage = () => {
 
   return (
     <Fragment>
       <CssBaseline />
-      <Layout />
+      <SiderbarState>
+        <MetaTagState>
+          <Layout />
+        </MetaTagState>
+      </SiderbarState>
     </Fragment>
   );
 }

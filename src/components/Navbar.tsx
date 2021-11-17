@@ -30,7 +30,7 @@ export default function Navbar(): JSX.Element {
                     <Box sx={classes.searchContent}>
                         <Search />
                     </Box>
-                    <Button color="inherit">Font Generator</Button>
+                    {/* <Button color="inherit">Font Generator</Button> */}
                 </Toolbar>
             </AppBar>
         </Fragment>
