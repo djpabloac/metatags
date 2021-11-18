@@ -11,6 +11,10 @@ Install MetaTag Frontend with npm
   yarn install
 ```
 
+Install Allow plugin in Google Chrome to search for website meta tags 
+
+- [Plugin allow-cors-access-control](https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf)
+
 ## Authors
 
 - [@dj.pablo.ac](https://gitlab.com/dj.pablo.ac)
