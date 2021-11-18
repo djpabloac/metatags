@@ -3,14 +3,14 @@ import { MetaTagType } from 'types/metatag.type';
 
 interface MetaTagContextType {
     MetaTagField: MetaTagType;
-    fontGenerator: () => void;
     setMetaTag: (property: string, value: string) => void;
+    loadMetaTag: (MetaTagField: MetaTagType) => void;
 }
 
 const initialState: MetaTagContextType = {
     MetaTagField: {},
-    fontGenerator: () => {} ,
     setMetaTag: (property, value) => {},
+    loadMetaTag: (MetaTagField) => {},
 }
 const MetaTagContext = createContext(initialState);
 

@@ -2,7 +2,6 @@ import { Fragment, useContext } from 'react';
 import {
     Box,
     Typography,
-    Fab,
 } from '@mui/material';
 import BaseTag from "components/MetaTag/Preview/BaseTag";
 import MetaTagContext from 'context/MetaTag/MetaTagContext';
@@ -14,8 +13,7 @@ export default function TwitterTag() {
         <Fragment>
             <BaseTag title='Twitter'>
                 <Box sx={{
-                    alignItems: 'center',
-                    backgroundImage: 'url("/assets/metatagdetail.png")',
+                    backgroundImage: `url("${MetaTagField.image || ''}")`,
                     backgroundPosition: 'center',
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
@@ -23,10 +21,7 @@ export default function TwitterTag() {
                     borderTopLeftRadius: '8px',
                     borderTopRightRadius: '8px',
                     cursor: 'pointer',
-                    display: 'flex',
-                    flexDirection: 'column',
                     height: '140px',
-                    justifyContent: 'center',
                     '@media screen and (min-width: 1025px)': {
                         height: '261px',
                     },
@@ -88,7 +83,7 @@ export default function TwitterTag() {
                         textOverflow: 'ellipsis',
                         marginTop: '0.32333em',
                     }}>
-                        {MetaTagField.url}
+                        {MetaTagField.getUrlEmpty ? MetaTagField.getUrlEmpty() : MetaTagField.url}
                     </Typography>
                 </Box>
             </BaseTag>

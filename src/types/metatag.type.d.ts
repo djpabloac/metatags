@@ -7,4 +7,9 @@ export interface MetaTagType extends DataModel {
    url?: string;
    titleLength?: number;
    descriptionLength?: number;
+   getUrlEmpty?: () => string;
+
+   site_name?: string;
+   icon?: string;
+   keywords?: string;
 }

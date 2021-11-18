@@ -7,13 +7,11 @@ import {
     Navbar,
     Siderbar,
 } from 'components'
-
 import {
     MetaTagDetail,
     MetaTagList,
 }
     from 'components/MetaTag';
-import { classesGlobal } from 'styles/useStyleGlobal'
 
 export default function Layout() {
 

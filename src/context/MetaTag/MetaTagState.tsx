@@ -7,19 +7,22 @@ import MetaTagContext from "context/MetaTag/MetaTagContext";
 
 
 const MetaTagState = ({ children }: { children: JSX.Element | string }) => {
+
     const initialState: MetaTagType = {
-        image: '/assets/metatagdetail.png',
-        title: 'Meta Tags — Preview, Edit and Generate',
-        description: 'With Meta Tags you can edit and experiment with your content then preview how your webpage will look on Google, Facebook, Twitter and more!',
-        url: 'https://metatags.io',
-        titleLength: 'Meta Tags — Preview, Edit and Generate'.length,
-        descriptionLength: 'With Meta Tags you can edit and experiment with your content then preview how your webpage will look on Google, Facebook, Twitter and more!'.length,
+        title: '',
+        description: '',
+        url: 'https://metatags.io'
     };
+    initialState.titleLength = initialState.title ? initialState.title.length : 0;
+    initialState.descriptionLength = initialState.description ? initialState.description.length : 0;
 
     const [state, dispatch] = useReducer(MetaTagReducer, initialState,);
 
-    const fontGenerator = () => {
-        console.log('fontGenerator');
+    const loadMetaTag = (MetaTagField: MetaTagType) => {
+        dispatch({
+            type: MetaTagActionKind.LOAD_METATAG,
+            payload: MetaTagField,
+        })
     }
 
     const setMetaTag = (property: string, value: string) => {
@@ -35,8 +38,8 @@ const MetaTagState = ({ children }: { children: JSX.Element | string }) => {
     return (
         <MetaTagContext.Provider value={{
             MetaTagField: state as MetaTagType,
-            fontGenerator,
             setMetaTag,
+            loadMetaTag,
         }}>
             {children}
         </MetaTagContext.Provider>

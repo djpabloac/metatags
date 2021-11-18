@@ -1,7 +1,7 @@
 import { MetaTagType } from 'types/metatag.type';
 
 export enum MetaTagActionKind {
-    SET_IMAGE = 'SET_IMAGE',
+    LOAD_METATAG = 'LOAD_METATAG',
     SET_METATAG = 'SET_METATAG',
 }
 
@@ -17,11 +17,14 @@ export interface MetaTagAction {
 
 export default function MetaTagReducer(state: MetaTagType, action: MetaTagAction): MetaTagType {
     switch (action.type) {
-        case MetaTagActionKind.SET_IMAGE:
-            let image = action.payload as string;
+        case MetaTagActionKind.LOAD_METATAG:
+            const payload = action.payload as MetaTagType;
             return {
                 ...state,
-                image,
+                ...payload,
+                titleLength: payload.title ? payload.title.length : 0,
+                descriptionLength: payload.description ? payload.description.length : 0,
+                getUrlEmpty: () => state.url ? state.url.replace('https://', '').replace('http://', '') : '',
             };
         case MetaTagActionKind.SET_METATAG:
             const fieldProperty = action.payload as MetaTagPropertyType;
@@ -29,6 +32,7 @@ export default function MetaTagReducer(state: MetaTagType, action: MetaTagAction
                 ...state,
                 [fieldProperty.property]: fieldProperty.value,
                 [`${fieldProperty.property}Length`]: fieldProperty.value ? fieldProperty.value.length : 0,
+                getUrlEmpty: () => fieldProperty.property === 'url' ? fieldProperty.value.replace('https://', '').replace('http://', '') : state.url || '',
             };
         default:
             return state;

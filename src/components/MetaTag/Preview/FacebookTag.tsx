@@ -2,7 +2,6 @@ import { Fragment, useContext } from 'react';
 import {
     Box,
     Typography,
-    Fab,
 } from '@mui/material';
 import BaseTag from "components/MetaTag/Preview/BaseTag";
 import MetaTagContext from 'context/MetaTag/MetaTagContext';
@@ -14,17 +13,13 @@ export default function FacebookTag() {
         <Fragment>
             <BaseTag title='Facebook'>
                 <Box sx={{
-                    alignItems: 'center',
-                    backgroundImage: 'url("/assets/metatagdetail.png")',
+                    backgroundImage: `url("${MetaTagField.image || ''}")`,
                     backgroundPosition: 'center',
                     backgroundSize: 'cover',
                     backgroundRepeat: 'no-repeat',
                     border: '1px solid #dde5e8',
                     cursor: 'pointer',
-                    display: 'flex',
-                    flexDirection: 'column',
                     height: '140px',
-                    justifyContent: 'center',
                     '@media screen and (min-width: 1025px)': {
                         height: '261px',
                     },
@@ -48,7 +43,7 @@ export default function FacebookTag() {
                         whiteSpace: 'nowrap',
                         wordWrap: 'break-word',
                     }}>
-                        {MetaTagField.url}
+                        {MetaTagField.getUrlEmpty ? MetaTagField.getUrlEmpty() : MetaTagField.url}
                     </Typography>
                     <Typography sx={{
                         color: '#1d2129',
