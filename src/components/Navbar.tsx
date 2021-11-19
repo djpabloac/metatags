@@ -24,7 +24,7 @@ export default function Navbar(): JSX.Element {
                     <Box sx={classes.titleContent}>
                         <Image src='/assets/metatags.svg' alt='Meta Tags' width='40' height='40' />
                         <Typography variant="h5" sx={classes.titleCaption}>
-                            Meta Tags
+                            MetaTags Clone
                         </Typography>
                     </Box>
                     <Box sx={classes.searchContent}>
