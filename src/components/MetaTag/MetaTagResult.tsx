@@ -45,7 +45,7 @@ export default function MetaTagResult({
 
     return (
         <Fragment>
-            <Dialog open={open} title='Tus Meta Tags' onClose={handleClose}>
+            <Dialog open={open} title='You Meta Tags' onClose={handleClose} template={template} showCopy={true}>
                 <div style={{
                     border: '1px solid #fff',
                     padding: '15px',
@@ -53,19 +53,19 @@ export default function MetaTagResult({
                     borderRadius: '8px',
                     overflow: 'auto',
                 }}>
-                    <code style={{ color: '#00193a', }}>
+                    <code id='code-result' style={{ color: '#00193a', }}>
                         {
                             template.length === 0 ? 'Selecciona un red social' :
                                 template.map((s, i) => {
                                     if (s) {
                                         let isComment = s.indexOf('<!--')
                                         return (
-                                            <div key={i} style={{whiteSpace: 'nowrap', color: isComment ? '#0048ab' : '#00193a' }}>
+                                            <div key={i} style={{ whiteSpace: 'nowrap', color: isComment ? '#0048ab' : '#00193a' }}>
                                                 {s}
                                             </div>);
                                     }
 
-                                    return <br key={i}/>;
+                                    return <br key={i} />;
                                 })
                         }
                     </code>
@@ -81,6 +81,8 @@ const getTemplate = (socialNetwroks: SocialNetworkType[], metaTag: MetaTagType):
         return [];
 
     let templates: string[] = [];
+    let templatesTitle: string[] = [];
+    let openGraphTitle = '<!-- Open Graph / ';
 
     const title = metaTag.title || '';
     const description = metaTag.description || '';
@@ -96,13 +98,17 @@ const getTemplate = (socialNetwroks: SocialNetworkType[], metaTag: MetaTagType):
             templates.push('');
         }
         else if (sn.name == socialNetworkKing.FACEBOOK || sn.name == socialNetworkKing.LINKEDIN || sn.name == socialNetworkKing.PINTEREST || sn.name == socialNetworkKing.SLACK) {
-            templates.push('<!-- Open Graph / Facebook -->');
-            templates.push('<meta property="og:type" content="website">');
-            templates.push(`<meta property="og:url" content="${url}">`);
-            templates.push(`<meta property="og:title" content="${title}">`);
-            templates.push(`<meta property="og:description" content="${description}">`);
-            templates.push(`<meta property="og:image" content="${image}">`);
-            templates.push('');
+            templatesTitle.push(sn.name);
+
+            if (!templates.includes(openGraphTitle)) {
+                templates.push(openGraphTitle);
+                templates.push('<meta property="og:type" content="website">');
+                templates.push(`<meta property="og:url" content="${url}">`);
+                templates.push(`<meta property="og:title" content="${title}">`);
+                templates.push(`<meta property="og:description" content="${description}">`);
+                templates.push(`<meta property="og:image" content="${image}">`);
+                templates.push('');
+            }
         }
         else if (sn.name == socialNetworkKing.TWITTER) {
             templates.push('<!-- Twitter -->');
@@ -114,6 +120,15 @@ const getTemplate = (socialNetwroks: SocialNetworkType[], metaTag: MetaTagType):
             templates.push('');
         }
     });
+
+    if (templates){
+        templates.map((value, index) => {
+            if(value === openGraphTitle) {
+                console.log(templatesTitle)
+                templates[index] = `${openGraphTitle} ${templatesTitle.join(' / ')} -->`
+            }
+        });
+    }
 
     return templates;
 }

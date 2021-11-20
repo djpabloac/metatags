@@ -1,10 +1,14 @@
-import { Fragment, } from 'react'
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
+import { Fragment, useState, } from 'react'
+import {
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    Snackbar,
+    Alert,
+} from '@mui/material';
 
 export interface DialogPropsType {
     open?: boolean;
@@ -12,12 +16,15 @@ export interface DialogPropsType {
     description?: string | string[];
     children?: JSX.Element | JSX.Element[] | string | string[];
     onClose: () => void;
+    showCopy?: boolean;
+    template?: string[];
 }
 
 export const DialogInitialState = {
     open: false,
     title: 'Taos',
     description: '',
+    showCopy: false,
 }
 
 export default function Siderbar({
@@ -26,10 +33,29 @@ export default function Siderbar({
     description = DialogInitialState.description,
     children,
     onClose,
+    showCopy = DialogInitialState.showCopy,
 }: DialogPropsType) {
+    const [openSnackbar, setOpenSnackbar] = useState(false);
 
     const handleClose = () => {
         onClose();
+    };
+    const handleCloseSnackbar = () => {
+        setOpenSnackbar(false);
+    };
+    const handleCopy = async () => {
+        if (children) {
+            if (!navigator.clipboard)
+                return;
+
+            try {
+                const codeResult = document.getElementById('code-result');
+                await navigator.clipboard.writeText(codeResult?.innerText || '');
+                setOpenSnackbar(true);
+            } catch (err) {
+                console.error('Failed to copy!', err);
+            }
+        }
     };
 
     return (
@@ -55,9 +81,27 @@ export default function Siderbar({
                         : children
                     }
                 </DialogContent>
-                <DialogActions>
+                <DialogActions sx={{ mb: '15px' }}>
+                    {showCopy ?
+                        <Fragment>
+                            <Button onClick={handleCopy} color='info' variant='contained' size='small' sx={{ marginRight: '15px', }}>
+                                Copy
+                            </Button>
+                            <Snackbar
+                                open={openSnackbar}
+                                autoHideDuration={6000}
+                                onClose={handleCloseSnackbar}
+                                anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+                            >
+                                <Alert onClose={handleCloseSnackbar} severity="success" sx={{ width: '100%' }}>
+                                    Copied to clipboard
+                                </Alert>
+                            </Snackbar>
+                        </Fragment>
+                        : null
+                    }
                     <Button onClick={handleClose} autoFocus variant='contained' size='small' sx={{ marginRight: '15px', }}>
-                        Aceptar
+                        Accept
                     </Button>
                 </DialogActions>
             </Dialog>

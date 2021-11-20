@@ -56,9 +56,10 @@ export default function MetaTagImage(): JSX.Element {
                 setMetaTag('image', URLImage);
             } else {
                 setDialog({
+                    ...DialogInitialState,
                     open: true,
                     title: 'Formato no permitido.',
-                    description: 'Los formatos permitidos son ' + AllowFormatKind.toString(),
+                    description: `Los formatos permitidos son ${AllowFormatKind.join(' ')}`,
                 });
             }
         }
@@ -123,7 +124,7 @@ export default function MetaTagImage(): JSX.Element {
                 </Box>
             </div>
             <input ref={inputFile} name='image' type='file' style={{ display: 'none', }}
-                accept="image/png, image/jpeg"
+                accept={AllowFormatKind.toString()}
                 onChange={handleChangeFile} />
         </Fragment>
     )
