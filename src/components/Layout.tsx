@@ -18,22 +18,22 @@ export default function Layout() {
     return (
         <Fragment>
             <Navbar />
-            <Box component='main'>
+            <Box component='main' sx={{minWidth: '900px'}}>
                 <Grid container spacing={0}>
-                    <Grid item xs={3} sx={{
+                    <Grid item xs={3} lg={2} xl={2} sx={{
                         ...classes.borderGrid,
                         paddingLeft: '24px',
                         paddingTop: '24px',
                     }}>
                         <Siderbar />
                     </Grid>
-                    <Grid item xs={4} sx={{
+                    <Grid item xs={4} lg={5} xl={5} sx={{
                         ...classes.contentGrid,
                         ...classes.borderGrid,
                     }}>
                         <MetaTagDetail />
                     </Grid>
-                    <Grid item xs={5} sx={{
+                    <Grid item xs={5} lg={5} xl={5} sx={{
                         ...classes.contentGrid,
                         ...classes.borderGrid,
                         paddingRight: '24px',
