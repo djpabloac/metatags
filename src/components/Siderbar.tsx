@@ -23,6 +23,7 @@ export default function Siderbar() {
             if(sn.checked)
                 addSelected(sn);
         }))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handlerSocial = (sn: SocialNetworkType) => {
