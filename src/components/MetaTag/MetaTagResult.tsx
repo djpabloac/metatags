@@ -41,7 +41,7 @@ export default function MetaTagResult({
         const result = getTemplate(selectedSocialNetwork, MetaTagField);
         setTemplate(result);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [selectedSocialNetwork]);
+    }, [selectedSocialNetwork, MetaTagField]);
 
     return (
         <Fragment>
@@ -124,7 +124,6 @@ const getTemplate = (socialNetwroks: SocialNetworkType[], metaTag: MetaTagType):
     if (templates){
         templates.map((value, index) => {
             if(value === openGraphTitle) {
-                console.log(templatesTitle)
                 templates[index] = `${openGraphTitle} ${templatesTitle.join(' / ')} -->`
             }
         });

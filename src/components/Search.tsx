@@ -69,7 +69,6 @@ const getMetaTag = async (MetaTagField: MetaTagType) => {
         return response;
 
     } catch (error) {
-        console.log('Error: ', error);
         const response: MetaTagType = {};
         return response;
     }

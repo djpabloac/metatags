@@ -29,7 +29,6 @@ export default function MetaTagImage(): JSX.Element {
             inputFile.current.click();
     }
     const handleChangeFile = (e: any) => {
-        console.log(e.target.files[0]);
         let URLImage = window.URL.createObjectURL(e.target.files[0]);
         setMetaTag('image', URLImage);
         e.target.value = "";
