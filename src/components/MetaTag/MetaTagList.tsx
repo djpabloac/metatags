@@ -43,16 +43,15 @@ export default function MetaTagList() {
                     Preview
                 </Typography>
                 <Button
-                    variant='outlined' size='small'
+                    variant='outlined'
                     sx={{
-                        top: '-15px',
                         fontWeight: 'bold',
                         fontSize: '11px',
                         textTransform: 'uppercase',
                     }}
                     onClick={handleOpen}
+                    startIcon={<CodeIcon />}
                 >
-                    <CodeIcon />
                     Generate Meta Tags
                 </Button>
             </Box>

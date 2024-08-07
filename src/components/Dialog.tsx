@@ -100,7 +100,7 @@ export default function Siderbar({
                         </Fragment>
                         : null
                     }
-                    <Button onClick={handleClose} autoFocus variant='contained' size='small' sx={{ marginRight: '15px', }}>
+                    <Button onClick={handleClose} variant='contained' size='small' sx={{ marginRight: '15px', }}>
                         Accept
                     </Button>
                 </DialogActions>
