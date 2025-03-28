@@ -1,11 +1,11 @@
-import { useReducer } from "react";
+import { ReactNode, useReducer } from "react";
 import { SocialNetworkType } from "types/socialnetwork.types";
 import SiderbarReducer, {
     SiderbarTypeKind,
 } from "context/Siderbar/SiderbarReducer";
 import SiderbarContext from "context/Siderbar/SiderbarContext";
 
-const SiderbarState = ({ children }: {children: JSX.Element | string }) => {
+const SiderbarState = ({ children }: {children: ReactNode | string }) => {
 
     const initialState: SocialNetworkType[] = [];
 

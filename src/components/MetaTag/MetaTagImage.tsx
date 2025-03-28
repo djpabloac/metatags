@@ -18,7 +18,7 @@ const AllowFormatKind: string[] = [
     "image/jpeg",
 ];
 
-export default function MetaTagImage(): JSX.Element {
+export default function MetaTagImage() {
 
     const [dialog, setDialog] = useState(DialogInitialState);
     const { MetaTagField, setMetaTag } = useContext(MetaTagContext);

@@ -1,4 +1,4 @@
-import { Fragment, useState, } from 'react'
+import { Fragment, ReactNode, useState, } from 'react'
 import {
     Button,
     Dialog,
@@ -14,7 +14,7 @@ export interface DialogPropsType {
     open?: boolean;
     title?: string;
     description?: string | string[];
-    children?: JSX.Element | JSX.Element[] | string | string[];
+    children?: ReactNode | ReactNode[] | string | string[];
     onClose: () => void;
     showCopy?: boolean;
     template?: string[];

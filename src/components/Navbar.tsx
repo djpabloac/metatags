@@ -10,7 +10,7 @@ import {
 import Search from 'components/Search';
 import { classesGlobal } from 'styles/useStyleGlobal';
 
-export default function Navbar(): JSX.Element {
+export default function Navbar() {
 
     return (
         <Fragment>

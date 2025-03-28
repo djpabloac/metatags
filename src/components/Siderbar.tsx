@@ -56,7 +56,6 @@ export default function Siderbar() {
                                 <ListItem
                                     sx={sn.disabled ? classes.cursorNormal : classes.cursorPointer}
                                     key={`item-${s._id}-${sn._id}`}
-                                    disabled={sn.disabled}
                                     onClick={() => {
                                         if (!sn.disabled)
                                             handlerSocial(sn)

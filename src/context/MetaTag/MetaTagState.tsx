@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { ReactNode, useReducer } from "react";
 import { MetaTagType } from 'types/metatag.type';
 import MetaTagReducer, {
     MetaTagActionKind,
@@ -6,7 +6,7 @@ import MetaTagReducer, {
 import MetaTagContext from "context/MetaTag/MetaTagContext";
 
 
-const MetaTagState = ({ children }: { children: JSX.Element | string }) => {
+const MetaTagState = ({ children }: { children: ReactNode | string }) => {
 
     const initialState: MetaTagType = {
         title: '',

@@ -14,7 +14,7 @@ import {
 import { classesGlobal } from 'styles/useStyleGlobal';
 import MetaTagContext from 'context/MetaTag/MetaTagContext';
 
-export default function MetaTagDetail(): JSX.Element {
+export default function MetaTagDetail() {
 
     const { MetaTagField, setMetaTag } = useContext(MetaTagContext);
 

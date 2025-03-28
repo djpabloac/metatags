@@ -65,7 +65,7 @@ const getMetaTag = async (MetaTagField: MetaTagType) => {
             icon: icon,
             keywords: keywords,
         };
-
+        console.log('response', response)
         return response;
 
     } catch (error) {
