@@ -3,7 +3,7 @@ import {
     useContext,
     useEffect,
 } from 'react';
-import cheerio from "cheerio";
+import * as cheerio from "cheerio";
 import { SearchMeta } from "components/UI/material-metatag";
 import MetaTagContext from "context/MetaTag/MetaTagContext";
 import { MetaTagType } from 'types/metatag.type';
