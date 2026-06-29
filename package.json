@@ -1,6 +1,10 @@
 {
   "name": "metatags",
   "private": true,
+  "engines": {
+    "node": ">=22.0.0",
+    "pnpm": ">=10.0.0"
+  },
   "scripts": {
     "dev": "PORT=4001 next dev",
     "build": "next build",
@@ -9,20 +13,32 @@
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
-    "@mui/icons-material": "^7.0.0",
-    "@mui/material": "^7.0.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.11",
+    "@mui/material": "^7.3.11",
     "@mui/styles": "^6.4.8",
-    "cheerio": "^1.0.0",
-    "next": "^15.2.4",
-    "react": "19.0.0",
-    "react-dom": "19.0.0"
+    "cheerio": "^1.2.0",
+    "next": "^15.5.19",
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
   },
   "devDependencies": {
     "@types/node": "22.13.14",
     "@types/react": "19.0.12",
-    "eslint": "9.23.0",
-    "eslint-config-next": "15.2.4",
+    "eslint": "^9.39.4",
+    "eslint-config-next": "^15.5.19",
     "typescript": "5.8.2"
+  },
+  "pnpm": {
+    "overrides": {
+      "eslint-plugin-import>minimatch": "^3.1.4",
+      "minimatch@>=9": "^9.0.7",
+      "brace-expansion@<2": "^1.1.13",
+      "brace-expansion@>=2": "^2.0.3",
+      "flatted": "^3.4.2",
+      "picomatch": "^2.3.2",
+      "postcss": "^8.5.10",
+      "yaml@<2": "^1.10.3"
+    }
   }
 }
